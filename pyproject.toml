@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "claude-mcp-tools"
+version = "0.1.0"
+description = "MCP tools for Claude"
+authors = [
+    {name = "Claude", email = "noreply@anthropic.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10.11"
+license = {text = "MIT"}
+dependencies = [
+    "mcp",
+    "pillow",
+    "loguru",
+    "mss",
+    "pyautogui",
+    "screeninfo>=0.8.1",
+    "litellm>=1.68.2",
+    "json-repair>=0.44.1",
+    "redis>=6.0.0",
+    "python-dotenv>=1.1.0",
+    # API centric
+    "google-auth>=2.39.0",
+    "google-auth-oauthlib>=1.2.2",
+    "typer>=0.15.3",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/anthropics/claude-mcp-tools"
+"Bug Tracker" = "https://github.com/anthropics/claude-mcp-tools/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38"]

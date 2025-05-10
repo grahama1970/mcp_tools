@@ -1,0 +1,1 @@
+cd /Users/robert/claude_mcp_configs && source .venv/bin/activate
