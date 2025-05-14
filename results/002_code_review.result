@@ -1,0 +1,44 @@
+### Improvements:
+
+1. Use list comprehension instead of for loop
+2. Add type hints for better code readability
+3. Add docstring for function documentation
+4. Handle empty list input
+5. Consider using a more descriptive function name
+
+### Potential bugs/edge cases:
+- No handling for empty list input
+- No type checking (if non-numeric data is passed)
+- No documentation about function behavior
+
+### Improved version:
+
+```python
+from typing import List, Union
+
+def double_positive_values(data: List[Union[int, float]]) -> List[Union[int, float]]:
+    """
+    Process a list of numbers by doubling positive values and setting non-positive values to zero.
+    
+    Args:
+        data: List of numeric values to process
+        
+    Returns:
+        List with processed values
+        
+    Examples:
+        >>> double_positive_values([5, -3, 10, 0, 8, -2])
+        [10, 0, 20, 0, 16, 0]
+    """
+    if not data:
+        return []
+        
+    return [x * 2 if x > 0 else 0 for x in data]
+    
+# Example usage
+data = [5, -3, 10, 0, 8, -2]
+processed = double_positive_values(data)
+print(processed)  # [10, 0, 20, 0, 16, 0]
+```
+
+This improved version is more efficient, more readable, properly documented, and handles edge cases better.

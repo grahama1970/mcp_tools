@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Root directory of the project
 ROOT_DIR = Path(__file__).parent.parent.absolute()
-SRC_DIR = ROOT_DIR / "src" / "claude_mcp_tools"
+SRC_DIR = ROOT_DIR / "src" / "mcp_tools"
 OUTPUT_DIR = ROOT_DIR / "standalone"
 
 

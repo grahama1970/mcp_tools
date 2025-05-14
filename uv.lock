@@ -231,43 +231,6 @@ wheels = [
 ]
 
 [[package]]
-name = "claude-mcp-tools"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "google-auth" },
-    { name = "google-auth-oauthlib" },
-    { name = "json-repair" },
-    { name = "litellm" },
-    { name = "loguru" },
-    { name = "mcp" },
-    { name = "mss" },
-    { name = "pillow" },
-    { name = "pyautogui" },
-    { name = "python-dotenv" },
-    { name = "redis" },
-    { name = "screeninfo" },
-    { name = "typer" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "google-auth", specifier = ">=2.39.0" },
-    { name = "google-auth-oauthlib", specifier = ">=1.2.2" },
-    { name = "json-repair", specifier = ">=0.44.1" },
-    { name = "litellm", specifier = ">=1.68.2" },
-    { name = "loguru" },
-    { name = "mcp" },
-    { name = "mss" },
-    { name = "pillow" },
-    { name = "pyautogui" },
-    { name = "python-dotenv", specifier = ">=1.1.0" },
-    { name = "redis", specifier = ">=6.0.0" },
-    { name = "screeninfo", specifier = ">=0.8.1" },
-    { name = "typer", specifier = ">=0.15.3" },
-]
-
-[[package]]
 name = "click"
 version = "8.1.8"
 source = { registry = "https://pypi.org/simple" }
@@ -793,6 +756,45 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ff/97/0a3e08559557b0ac5799f9fb535fbe5a4e4dcdd66ce9d32e7a74b4d0534d/mcp-1.8.0.tar.gz", hash = "sha256:263dfb700540b726c093f0c3e043f66aded0730d0b51f04eb0a3eb90055fe49b", size = 264641 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b2/b2/4ac3bd17b1fdd65658f18de4eb0c703517ee0b483dc5f56467802a9197e0/mcp-1.8.0-py3-none-any.whl", hash = "sha256:889d9d3b4f12b7da59e7a3933a0acadae1fce498bfcd220defb590aa291a1334", size = 119544 },
+]
+
+[[package]]
+name = "mcp-tools"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "google-auth" },
+    { name = "google-auth-oauthlib" },
+    { name = "json-repair" },
+    { name = "litellm" },
+    { name = "loguru" },
+    { name = "mcp" },
+    { name = "mss" },
+    { name = "pillow" },
+    { name = "pyautogui" },
+    { name = "python-dotenv" },
+    { name = "redis" },
+    { name = "screeninfo" },
+    { name = "stickytape" },
+    { name = "typer" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "google-auth", specifier = ">=2.39.0" },
+    { name = "google-auth-oauthlib", specifier = ">=1.2.2" },
+    { name = "json-repair", specifier = ">=0.44.1" },
+    { name = "litellm", specifier = ">=1.68.2" },
+    { name = "loguru" },
+    { name = "mcp" },
+    { name = "mss" },
+    { name = "pillow" },
+    { name = "pyautogui" },
+    { name = "python-dotenv", specifier = ">=1.1.0" },
+    { name = "redis", specifier = ">=6.0.0" },
+    { name = "screeninfo", specifier = ">=0.8.1" },
+    { name = "stickytape", specifier = ">=0.2.1" },
+    { name = "typer", specifier = ">=0.15.3" },
 ]
 
 [[package]]
@@ -1750,6 +1752,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ce/20/08dfcd9c983f6a6f4a1000d934b9e6d626cff8d2eeb77a89a68eef20a2b7/starlette-0.46.2.tar.gz", hash = "sha256:7f7361f34eed179294600af672f565727419830b54b7b084efe44bb82d2fccd5", size = 2580846 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8b/0c/9d30a4ebeb6db2b25a841afbb80f6ef9a854fc3b41be131d249a977b4959/starlette-0.46.2-py3-none-any.whl", hash = "sha256:595633ce89f8ffa71a015caed34a5b2dc1c0cdb3f0f1fbd1e69339cf2abeec35", size = 72037 },
+]
+
+[[package]]
+name = "stickytape"
+version = "0.2.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/61/8c/59e35d7b75129ad81544c40922b13a9cfff111b67a4e01829044e1080dad/stickytape-0.2.1.tar.gz", hash = "sha256:9bbdd5dabed633ffde36bb7f656ee0cb55aeae9f87d9c95e377a06bf1ba7df8d", size = 6301 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/18/20/d44f0e1acbabcd805e3165d143a37cfd575793082635f62a2180524be180/stickytape-0.2.1-py3-none-any.whl", hash = "sha256:66046dedac42484a352d87c12bc4272e4e222260a41f6e1fcbb29876c018e543", size = 8055 },
 ]
 
 [[package]]

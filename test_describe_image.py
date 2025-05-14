@@ -1,7 +1,7 @@
 import os
 from PIL import Image
-from claude_mcp_tools.llm_call.describe_image import describe_image
-from claude_mcp_tools.llm_call.initialize_litellm_cache import initialize_litellm_cache
+from mcp_tools.llm_call.describe_image import describe_image
+from mcp_tools.llm_call.initialize_litellm_cache import initialize_litellm_cache
 
 # Initialize LiteLLM cache
 initialize_litellm_cache()

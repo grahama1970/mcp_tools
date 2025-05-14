@@ -18,6 +18,14 @@ project_name/
 ├── README.md
 ├── src/
 │   └── project_name/
+│       ├── core/           # Pure business logic, independently testable functions
+│       │   └── functions.py
+│       ├── presentation/   # Rich formatting and UI components
+│       │   └── formatters.py
+│       ├── cli.py          # Command-line interface with typer
+│       └── mcp/            # MCP integration
+│           ├── schema.py   # MCP-compliant schemas
+│           └── wrapper.py  # FastMCP wrapper
 ├── tests/
 │   ├── fixtures/
 │   └── project_name/
@@ -27,6 +35,7 @@ project_name/
 - **Package Management**: Always use uv with pyproject.toml, never pip
 - **Mirror Structure**: examples/, tests/ mirror the project structure in src/
 - **Documentation**: Keep comprehensive docs in docs/ directory
+- **Layered Architecture**: Separate core functions, presentation, and MCP integrations
 
 ## Module Requirements
 - **Size**: Maximum 500 lines of code per file
@@ -36,6 +45,9 @@ project_name/
   - Sample input
   - Expected output
 - **Validation Function**: Every file needs a main block (`if __name__ == "__main__":`) that tests with real data
+  - Each function must demonstrate independent execution with clear sample I/O
+  - Core functions must be testable in isolation from UI and MCP concerns
+  - Include multiple test cases covering normal usage, edge cases, and error handling
 
 ## Architecture Principles
 - **Function-First**: Prefer simple functions over classes
@@ -52,17 +64,21 @@ project_name/
   ```python
   # Good type hint usage:
   from typing import Dict, List, Optional, Union, Tuple
-  
+
   def process_document(doc_id: str, options: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
       """Process a document with optional configuration."""
       # Implementation
       return result
-      
+
   # Simple types don't need annotations inside functions if obvious:
   def get_user_name(user_id: int) -> str:
       name = "John"  # Type inference works here, no annotation needed
       return name
   ```
+- **Independent Function Debugging**: Each function must be independently debuggable
+  - Include clear sample inputs and expected outputs in docstrings
+  - Functions should be usable in isolation with minimal dependencies
+  - Core logic should be separate from presentation concerns
 - **NO Conditional Imports**: 
   - Never use try/except blocks for imports of required packages
   - If a package is in pyproject.toml, import it directly at the top of the file
@@ -160,29 +176,76 @@ project_name/
 - **Logging**: Always use loguru for logging
   ```python
   from loguru import logger
-  
+
   # Configure logger
   logger.add("app.log", rotation="10 MB")
   ```
 - **CLI Structure**: Every command-line tool must use typer in a `cli.py` file
   ```python
   import typer
-  
-  app = typer.Typer()
-  
+  from typing import Optional
+  from pydantic import BaseModel, Field
+  from rich.console import Console
+  from rich.table import Table
+
+  # Define schema for CLI input/output
+  class CommandOptions(BaseModel):
+      param: str = Field(..., description="Parameter description")
+      option: Optional[bool] = Field(False, description="Option description")
+
+  app = typer.Typer(rich_markup_mode="rich", help="Command description with [bold]rich[/bold] formatting")
+  console = Console()
+
   @app.command()
-  def command_name(param: str = typer.Argument(..., help="Description")):
-      """Command description."""
+  def command_name(
+      param: str = typer.Argument(..., help="Description"),
+      option: bool = typer.Option(False, "--option", "-o", help="Option description"),
+  ):
+      """Command description with rich examples.
+
+      Example:
+          $ command_name value --option
+      """
       # Implementation
-  
+
+      # Use Rich tables for formatted output
+      table = Table(title="Results")
+      table.add_column("Name", style="cyan")
+      table.add_column("Value", style="green")
+      table.add_row("Parameter", param)
+      table.add_row("Option", str(option))
+      console.print(table)
+
   if __name__ == "__main__":
       app()
   ```
+- **Separation of Concerns**: Structure code in layers
+  - Core functions: Pure business logic with no UI or framework dependencies
+  - Presentation layer: Rich formatting, tables, and console output
+  - MCP integration: Adapters for MCP protocol and FastMCP wrappers
 
 ## Package Selection
 - **Research First**: Always research packages before adding dependencies
 - **95/5 Rule**: Use 95% package functionality, 5% customization
 - **Documentation**: Include links to current documentation in comments
+- **FastMCP Integration**: Use FastMCP for wrapping CLI tools
+  ```python
+  from fastmcp import FastMCP
+  from .cli import app as cli_app
+
+  # Create FastMCP wrapper for CLI app
+  mcp_app = FastMCP(
+      name="tool_name",
+      description="Tool description",
+      cli_app=cli_app,
+      schema_version="1.0"
+  )
+
+  # Entry point for MCP server
+  def mcp_handler(request):
+      """Handle MCP requests."""
+      return mcp_app.handle_request(request)
+  ```
 
 ## Development Priority
 1. Working Code
@@ -244,5 +307,9 @@ As an agent, before completing a task, verify that your work adheres to ALL stan
 9. Validation functions ONLY report success if explicitly verified by comparing actual to expected results
 10. Validation functions track and report ALL failures, not just the first one encountered
 11. Validation output includes count of failed tests out of total tests run
+12. Core functions are independent and separated from presentation/MCP concerns
+13. CLI components follow MCP-level quality standards with schemas and rich formatting
+14. Rich tables are used for formatted command output
+15. FastMCP wrapper is implemented for seamless MCP integration
 
 If any standard is not met, fix the issue before submitting the work.

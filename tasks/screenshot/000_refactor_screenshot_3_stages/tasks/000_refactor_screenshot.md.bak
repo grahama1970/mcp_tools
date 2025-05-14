@@ -1,0 +1,417 @@
+You're absolutely right. Let me revise the task plan to include explicitly re-reading CLAUDE.md before each task and ensuring git commits are included as the final step for each major task.
+
+# Screenshot Tool Refactoring Task Plan ⏳ Not Started
+
+**Objective**: Refactor the MCP screenshot tool with a layered architecture that ensures each function is independently debuggable, creates an MCP-quality CLI, and wraps it with FastMCP.
+
+**Requirements**:
+1. Each Python function must be independently debuggable with clear sample I/O
+2. CLI must follow MCP-level quality standards (schema, rich help, etc.)
+3. Separate core functions from presentation and MCP concerns
+4. Use Rich tables for formatted output
+5. Wrap CLI with FastMCP for seamless integration
+
+## Overview
+
+The refactoring will implement a three-layer architecture:
+1. **Core Layer**: Pure Python functions with no dependencies on CLI/MCP
+2. **Presentation Layer**: Rich formatters and Typer CLI with MCP-quality documentation
+3. **Integration Layer**: FastMCP wrapper that leverages the CLI functions
+
+This design ensures each component is independently testable and debuggable, while providing a seamless user experience across interfaces.
+
+## Implementation Tasks
+
+### Task 1: Refactor Core Functions with Debug Capabilities ⏳ Not Started
+
+**Pre-Task Setup**:
+- [ ] Re-read `/Users/robert/claude_mcp_configs/CLAUDE.md` to refresh on project guidelines
+- [ ] Review existing core functions in capture.py, image_processing.py, and description.py
+
+**Implementation Steps**:
+- [ ] 1.1 Create skeletal structure for core.py module with detailed docstrings
+- [ ] 1.2 Implement core screenshot capture function with proper error handling
+- [ ] 1.3 Implement core image processing functions with debug output
+- [ ] 1.4 Implement core description function with debug capability
+- [ ] 1.5 Add debug demonstrations in `__main__` section
+- [ ] 1.6 Create sample data validation function for testing
+- [ ] 1.7 Test core functions with sample input/output
+- [ ] 1.8 Git commit debugged core functions with message "Refactor: Core functions with independent debugging capabilities"
+
+**Technical Specifications**:
+- Each function must have:
+  - Detailed docstring with Args/Returns sections
+  - Type hints for all parameters and return values
+  - Example usage in docstring showing sample input/output
+  - Stand-alone debug/test capability in `__main__` section
+- Error handling must be comprehensive and return structured errors
+- No dependencies on CLI or MCP libraries in core functions
+
+**Verification Method**:
+- Run the module directly to execute self-tests: `python -m mcp_tools.screenshot.core`
+- Verify output matches expected sample data
+- Check error handling with invalid inputs
+
+**Acceptance Criteria**:
+- All functions run independently without CLI/MCP dependencies
+- Debug demonstrations run successfully
+- Documentation includes clear sample I/O
+- Error cases are properly handled and return structured data
+
+### Task 2: Create Rich Formatters Module ⏳ Not Started
+
+**Pre-Task Setup**:
+- [ ] Re-read `/Users/robert/claude_mcp_configs/CLAUDE.md` to refresh on project guidelines
+- [ ] Review Rich library table documentation for best practices
+
+**Implementation Steps**:
+- [ ] 2.1 Create formatters.py module skeleton with imports
+- [ ] 2.2 Implement screenshot table formatter with sample data
+- [ ] 2.3 Implement description table formatter with sample data
+- [ ] 2.4 Implement error panel formatter with sample cases
+- [ ] 2.5 Add debug/test code in `__main__` section
+- [ ] 2.6 Ensure consistent styling across all formatters
+- [ ] 2.7 Test formatters with various data scenarios
+- [ ] 2.8 Git commit verified formatters with message "Add: Rich table formatters module with self-testing capabilities"
+
+**Technical Specifications**:
+- Create formatters that match MCP quality display standards
+- Use Rich tables with consistent styling
+- Handle missing or partial data gracefully
+- Include sample debug/test code in `__main__` section
+- Format strings should escape Rich markup in user data
+
+**Verification Method**:
+- Run the module directly: `python -m mcp_tools.screenshot.formatters`
+- Verify visual output matches expected styling
+- Test with both complete and partial data
+
+**Acceptance Criteria**:
+- Formatters produce visually appealing tables/panels
+- Error cases are handled gracefully with appropriate fallbacks
+- Styling is consistent across all formatters
+- Debug output demonstrates all formatter capabilities
+
+### Task 3: Implement MCP-Quality CLI ⏳ Not Started
+
+**Pre-Task Setup**:
+- [ ] Re-read `/Users/robert/claude_mcp_configs/CLAUDE.md` to refresh on project guidelines
+- [ ] Review the MCP-quality CLI requirements from our conversation
+
+**Implementation Steps**:
+- [ ] 3.1 Create cli.py module with Typer app setup and imports
+- [ ] 3.2 Implement `screenshot` command with rich help documentation
+- [ ] 3.3 Implement `describe` command with parameter annotations
+- [ ] 3.4 Implement `screenshot_and_describe` combined command
+- [ ] 3.5 Add `schema` command for machine-readable documentation
+- [ ] 3.6 Add `regions` utility command
+- [ ] 3.7 Implement consistent error handling across commands
+- [ ] 3.8 Add comprehensive examples to help text
+- [ ] 3.9 Test CLI commands with various parameters
+- [ ] 3.10 Git commit verified CLI with message "Add: MCP-quality CLI with rich documentation and schema"
+
+**Technical Specifications**:
+- Follow MCP-level documentation standards:
+  - Use Annotated[] with typer.Option for all parameters
+  - Add rich_help_panel grouping for related options
+  - Include min/max validation where appropriate
+  - Add detailed examples in docstrings
+- Implement structured JSON output mode for all commands
+- Ensure consistent error handling with appropriate exit codes
+- Add schema command that outputs MCP-compatible JSON schema
+
+**Verification Method**:
+- Test CLI help: `python -m mcp_tools.screenshot.cli --help`
+- Test each command with `--help` flag
+- Test schema output: `python -m mcp_tools.screenshot.cli schema`
+- Verify JSON output mode works correctly
+
+**Acceptance Criteria**:
+- CLI provides rich help documentation comparable to MCP
+- All commands function correctly with proper parameters
+- Schema command outputs valid, MCP-compatible JSON
+- Error handling is consistent across all commands
+- CLI can be used by both humans and automated tools
+
+### Task 4: Create FastMCP Wrapper ⏳ Not Started
+
+**Pre-Task Setup**:
+- [ ] Re-read `/Users/robert/claude_mcp_configs/CLAUDE.md` to refresh on project guidelines
+- [ ] Review existing MCP implementation for compatibility
+
+**Implementation Steps**:
+- [ ] 4.1 Create mcp_tools.py module with FastMCP integration
+- [ ] 4.2 Implement server creation function with debug option
+- [ ] 4.3 Implement tool registration functions
+- [ ] 4.4 Adapt CLI functions for MCP interface
+- [ ] 4.5 Add detailed logging for debugging
+- [ ] 4.6 Implement parameter conversion between CLI and MCP
+- [ ] 4.7 Add stand-alone server test in `__main__` section
+- [ ] 4.8 Test MCP tools registration and function
+- [ ] 4.9 Git commit verified MCP wrapper with message "Add: FastMCP wrapper integrating with CLI functions"
+
+**Technical Specifications**:
+- Reuse CLI functions where possible to avoid duplication
+- Ensure parameter types are compatible between MCP and CLI
+- Add detailed logging at each step for debugging
+- Maintain the same functionality as original MCP implementation
+- Implement debug mode for enhanced logging
+
+**Verification Method**:
+- Run module directly to test MCP server: `python -m mcp_tools.screenshot.mcp_tools`
+- Check logs for expected registration and function events
+- Verify tool registration works correctly
+
+**Acceptance Criteria**:
+- MCP tools register correctly with FastMCP
+- CLI functions are properly utilized
+- Parameter conversion works correctly
+- Debug mode provides enhanced logging
+- Stand-alone test verifies basic functionality
+
+### Task 5: Update Server Entry Point and Configuration ⏳ Not Started
+
+**Pre-Task Setup**:
+- [ ] Re-read `/Users/robert/claude_mcp_configs/CLAUDE.md` to refresh on project guidelines
+- [ ] Review existing .mcp.json configuration
+
+**Implementation Steps**:
+- [ ] 5.1 Update run_screenshot_server.py with enhanced options
+- [ ] 5.2 Add command-line arguments for debug mode
+- [ ] 5.3 Configure logging based on arguments
+- [ ] 5.4 Update .mcp.json to reference the entry point
+- [ ] 5.5 Add version information and usage examples
+- [ ] 5.6 Test server start-up with various options
+- [ ] 5.7 Git commit verified entry point with message "Update: Enhanced server entry point with debug capabilities"
+
+**Technical Specifications**:
+- Use argparse to handle command-line options
+- Set up logging based on verbosity level
+- Ensure proper error handling on startup
+- Maintain compatibility with .mcp.json format
+- Add version and help information
+
+**Verification Method**:
+- Start server with various options: `python run_screenshot_server.py --debug`
+- Check logs for startup information
+- Verify .mcp.json configuration works
+
+**Acceptance Criteria**:
+- Server starts correctly with various options
+- Logging is properly configured
+- Version and help information is displayed
+- Compatible with .mcp.json configuration
+
+### Task 6: Integration Testing with MCP Inspector ⏳ Not Started
+
+**Pre-Task Setup**:
+- [ ] Re-read `/Users/robert/claude_mcp_configs/CLAUDE.md` to refresh on project guidelines
+- [ ] Ensure MCP Inspector is installed and working
+
+**Implementation Steps**:
+- [ ] 6.1 Start MCP server for testing
+- [ ] 6.2 Connect with MCP Inspector
+- [ ] 6.3 Test screenshot tool with various parameters
+- [ ] 6.4 Test describe_screenshot tool with various parameters
+- [ ] 6.5 Verify results match expected output
+- [ ] 6.6 Check logs for expected events
+- [ ] 6.7 Document any issues or unexpected behavior
+- [ ] 6.8 Git commit final tested version with message "Complete: Fully tested MCP screenshot tool with end-to-end verification"
+
+**Technical Specifications**:
+- Use MCP Inspector to test tools interactively
+- Test with various parameter combinations
+- Verify output format matches expectations
+- Check logs for detailed execution flow
+
+**Verification Method**:
+- Use MCP Inspector to interactively test tools
+- Examine logs for detailed execution information
+- Verify results match expected output
+
+**Acceptance Criteria**:
+- All tools function correctly through MCP Inspector
+- Output format matches expectations
+- Error cases are handled appropriately
+- Logs provide detailed debugging information
+
+## Core Function Debuggability
+
+Each core function will include:
+
+1. **Self-Contained Examples**:
+```python
+def capture_screenshot(quality: int = 30, region: Optional[Union[List[int], str]] = None) -> Dict[str, Any]:
+    """
+    Captures a screenshot of the desktop or a specific region.
+    
+    Args:
+        quality: JPEG compression quality (1-100)
+        region: Region coordinates [x, y, width, height] or "right_half"
+        
+    Returns:
+        dict: Response with screenshot data
+        
+    Example:
+        >>> result = capture_screenshot(quality=50, region="right_half")
+        >>> print(result.keys())
+        dict_keys(['file', 'dimensions', 'size'])
+        >>> print(os.path.exists(result['file']))
+        True
+    """
+```
+
+2. **Self-Test in `__main__` Section**:
+```python
+if __name__ == "__main__":
+    """Module self-test with sample inputs"""
+    import sys
+    
+    def run_demo():
+        print("=" * 40)
+        print("DEMO: capture_screenshot")
+        print("=" * 40)
+        
+        # Test 1: Basic full-screen capture
+        print("\nTest 1: Full-screen capture")
+        result = capture_screenshot(quality=30)
+        print(f"Result keys: {list(result.keys())}")
+        print(f"File exists: {os.path.exists(result['file'])}")
+        print(f"Dimensions: {result['dimensions']}")
+        print(f"File size: {result['size'] / 1024:.1f} KB")
+        
+        # Test 2: Right-half capture
+        print("\nTest 2: Right-half capture")
+        result = capture_screenshot(quality=30, region="right_half")
+        print(f"Result keys: {list(result.keys())}")
+        print(f"File exists: {os.path.exists(result['file'])}")
+        print(f"Dimensions: {result['dimensions']}")
+        print(f"File size: {result['size'] / 1024:.1f} KB")
+        
+        # Test 3: Error case - invalid region
+        print("\nTest 3: Invalid region")
+        result = capture_screenshot(quality=30, region="invalid")
+        print(f"Error correctly returned: {'error' in result}")
+        if 'error' in result:
+            print(f"Error message: {result['error']}")
+            
+    # Run the demo if requested
+    run_demo()
+```
+
+## MCP-Quality CLI Implementation
+
+The CLI will follow MCP-level documentation standards:
+
+1. **Rich Help Documentation**:
+```python
+@app.command()
+def screenshot(
+    quality: Annotated[int, typer.Option(
+        help="JPEG compression quality (1-100). Higher values = larger files.",
+        min=1, max=100,
+        rich_help_panel="Image Options"
+    )] = 30,
+    region: Annotated[str, typer.Option(
+        help="Screen region to capture: 'full', 'right_half', or coordinates (format: 'x,y,width,height')",
+        rich_help_panel="Image Options"
+    )] = "full",
+    output_dir: Annotated[str, typer.Option(
+        help="Directory to save the screenshot",
+        rich_help_panel="Output Options"
+    )] = "screenshots",
+    json_output: Annotated[bool, typer.Option(
+        help="Output results as JSON instead of rich text",
+        rich_help_panel="Output Options"
+    )] = False,
+):
+    """
+    Capture a screenshot of the desktop or a specific region.
+    
+    The screenshot is saved as a JPEG file with the specified quality.
+    
+    Examples:
+        screenshot --quality 50 --region right_half
+        screenshot --region "100,100,400,300" --output-dir my_screenshots
+        screenshot --json-output
+    """
+```
+
+2. **Machine-Readable Schema**:
+```python
+@app.command(hidden=True)
+def schema():
+    """Output the CLI schema in a machine-readable format."""
+    schema = {
+        "name": "screenshot_cli",
+        "version": "1.0.0",
+        "commands": {
+            "screenshot": {
+                "description": "Capture a screenshot of the desktop or a specific region.",
+                "parameters": {
+                    "quality": {
+                        "type": "integer",
+                        "description": "JPEG compression quality (1-100). Higher values = larger files.",
+                        "default": 30,
+                        "minimum": 1,
+                        "maximum": 100
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Screen region to capture: 'full', 'right_half', or coordinates (format: 'x,y,width,height')",
+                        "default": "full"
+                    },
+                    "output_dir": {
+                        "type": "string",
+                        "description": "Directory to save the screenshot",
+                        "default": "screenshots"
+                    }
+                },
+                "returns": {
+                    "type": "object",
+                    "properties": {
+                        "file": {"type": "string", "description": "Path to the saved screenshot file"},
+                        "dimensions": {"type": "array", "description": "Width and height of the image"},
+                        "size": {"type": "integer", "description": "Size in bytes of the saved file"}
+                    }
+                },
+                "examples": [
+                    {"description": "Capture right half of screen", "command": "screenshot --quality 50 --region right_half"},
+                    {"description": "Capture custom region", "command": "screenshot --region \"100,100,400,300\""}
+                ]
+            }
+        }
+    }
+    typer.echo(json.dumps(schema, indent=2))
+```
+
+## Usage Table
+
+| Command / Function | Description | Example Usage | Expected Output |
+|-------------------|-------------|---------------|-----------------|
+| Core Functions |
+| `capture_screenshot()` | Capture a screenshot | `capture_screenshot(quality=50, region="right_half")` | `{"file": "path/to/file.jpg", "dimensions": [800, 600], "size": 102400}` |
+| `describe_image()` | Describe an image | `describe_image("path/to/image.jpg")` | `{"description": "...", "confidence": 4}` |
+| CLI Commands |
+| `screenshot` | Take a screenshot | `screenshot --quality 50 --region right_half` | Rich table with screenshot details |
+| `describe` | Describe an image | `describe path/to/image.jpg` | Rich table with description |
+| `screenshot_and_describe` | Capture & describe | `screenshot_and_describe --region right_half` | Rich tables with screenshot and description |
+| `schema` | Get machine-readable docs | `schema` | JSON schema of all commands |
+| MCP Tools |
+| `screenshot` | MCP screenshot tool | N/A (used via MCP Inspector) | Screenshot result with optional description |
+| `describe_screenshot` | MCP describe tool | N/A (used via MCP Inspector) | Screenshot with description |
+
+## Version Control Plan
+
+- **Initial Commit**: Create before starting implementation with message "Task: Begin screenshot tool refactoring"
+- **Function Commits**: After each major function is implemented with descriptive messages
+- **Task Commits**: After completing each major task as specified in the steps
+- **Final Tag**: Create git tag "screenshot-tool-refactored-v1.0" upon completion
+
+This comprehensive task plan ensures you'll be able to implement the screenshot tool with:
+1. Independently debuggable functions
+2. MCP-quality CLI documentation 
+3. Rich visual formatting
+4. Seamless FastMCP integration
+
+Each step reinforces best practices and follows the specific patterns discussed in our conversation about making CLIs as close to MCP-level quality as possible.

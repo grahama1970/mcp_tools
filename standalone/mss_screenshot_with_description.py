@@ -22,6 +22,7 @@ from PIL import Image
 import mss
 from mcp.server.fastmcp import FastMCP
 from loguru import logger
+import typer
 
 # Constants for image capture and processing
 IMAGE_SETTINGS = {
@@ -47,39 +48,10 @@ logger.add(
 
 # Initialize FastMCP server for screenshot tool
 mcp = FastMCP("MSS Screenshot Tool")
-logger.info("Initialized FastMCP server for MSS screenshot tool")
+logger.info("Initialized FastMCP server fr MSS screenshot tool")
 
-# Import image description capabilities if available
-try:
-    from litellm import completion, JSONSchemaValidationError
-    DESCRIBE_IMAGE_AVAILABLE = True
-    logger.info("Image description functionality is available")
-    
-    # Define the response schema for image description
-    response_schema = {
-        "type": "object",
-        "properties": {
-            "description": {
-                "type": "string",
-                "description": "Detailed description of the image content"
-            },
-            "filename": {
-                "type": "string",
-                "description": "The name of the image file"
-            },
-            "confidence": {
-                "type": "integer",
-                "description": "Confidence score (1-5) on accuracy of description given image quality and possible compression artifacts",
-                "minimum": 1,
-                "maximum": 5
-            }
-        },
-        "required": ["description", "filename", "confidence"]
-    }
-    
-except ImportError:
-    DESCRIBE_IMAGE_AVAILABLE = False
-    logger.warning("Image description functionality is not available (litellm not installed)")
+# Initialize typer app
+app = typer.Typer(help="Claude MCP Screenshot Tool with MSS")
 
 
 def truncate_large_value(value, max_str_len=LOG_MAX_STR_LEN):
@@ -662,24 +634,28 @@ def debug_tests(save_results=True, test_describe=False):
     return results
 
 
+@app.command()
+def run_server():
+    """Start the FastMCP server for MSS screenshot tool."""
+    logger.info("Starting FastMCP server for MSS screenshot tool")
+    mcp.run()
+
+
+@app.command()
+def test(
+    save_results: bool = typer.Option(True, help="Save test results to debug_results.json"),
+    test_describe: bool = typer.Option(False, help="Test the describe functionality with API calls")
+):
+    """Run debug tests without starting the server."""
+    logger.info("Running in test mode")
+    debug_tests(save_results=save_results, test_describe=test_describe)
+
+
 if __name__ == "__main__":
-    import argparse
     """
     Agent Instruction for testing:
     Carefully read CLAUDE.md, move into the project directory, and activate the .venv. 
     Then use the describe_screenshot tool to capture the right half of the screen and 
     provide an AI description of what's visible.
     """
-    
-    parser = argparse.ArgumentParser(description="Claude MCP Screenshot Tool with MSS")
-    parser.add_argument("--test", action="store_true", help="Run debug tests without starting the server")
-    parser.add_argument("--test-describe", action="store_true", help="Test the describe functionality with API calls")
-    parser.add_argument("--save-results", action="store_true", default=True, help="Save test results to debug_results.json")
-    args = parser.parse_args()
-    
-    if args.test:
-        logger.info("Running in test mode")
-        debug_tests(save_results=args.save_results, test_describe=args.test_describe)
-    else:
-        logger.info("Starting FastMCP server for MSS screenshot tool")
-        mcp.run()
+    app()

@@ -1,0 +1,48 @@
+[
+  {
+    "test": 1,
+    "type": "screenshot",
+    "input": {
+      "quality": 30,
+      "region": null
+    },
+    "result": "Success"
+  },
+  {
+    "test": 2,
+    "type": "screenshot",
+    "input": {
+      "quality": 30,
+      "region": "right_half"
+    },
+    "result": "Success"
+  },
+  {
+    "test": 3,
+    "type": "screenshot",
+    "input": {
+      "quality": 30,
+      "region": [
+        100,
+        100,
+        300,
+        200
+      ]
+    },
+    "result": "Success"
+  },
+  {
+    "test": 4,
+    "type": "screenshot",
+    "input": {
+      "quality": 30,
+      "region": [
+        0,
+        0,
+        -100,
+        100
+      ]
+    },
+    "result": "Success"
+  }
+]

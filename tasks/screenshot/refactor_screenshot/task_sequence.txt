@@ -1,0 +1,15 @@
+# Task sequence for project: refactor_screenshot
+# Format: one task filename per line (relative to tasks directory)
+# Lines starting with # are comments and will be ignored
+# Empty lines are also ignored
+
+# Project overview comes first
+000_project_overview.md
+
+# Individual tasks in sequence
+001_core_functions.md
+002_rich_formatters.md
+003_mcp_quality_cli.md
+004_fastmcp_wrapper.md
+005_server_entry.md
+006_integration_testing.md

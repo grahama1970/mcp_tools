@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "claude-task-manager"
+version = "1.0.0"
+description = "Task management system for Claude Code with context isolation"
+readme = "README.md"
+authors = [
+    {name = "Graham Anderson", email = "graham@grahama.co"}
+]
+license = {text = "MIT License"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.7"
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.5.0",
+    "mcp>=0.9.0",
+    "python-dotenv>=1.1.0"
+]
+
+[project.scripts]
+claude-tasks = "claude_task_manager.cli:main"
+
+[project.urls]
+Repository = "https://github.com/grahama1970/claude-task-manager"
+
+[tool.setuptools]
+packages = ["claude_task_manager"]
